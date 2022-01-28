@@ -24,13 +24,17 @@ public class MarkdownParse {
                     currentIndex++;
                     continue;
                 }
-                if (!(markdown.charAt(nextOpenBracket-1) == '!')) {
-                    toReturn.add(markdown.substring(openParen + 1, closeParen));
-                }
+                try {
+                    if (!(markdown.charAt(nextOpenBracket-1) == '!')) {
+                        toReturn.add(markdown.substring(openParen + 1, closeParen));
+                    } 
+                }catch(Exception e){continue;}
+                   
+                
                 currentIndex = closeParen + 1;
             }
         }
-        return toReturn;
+            return toReturn;
     }
     public static void main(String[] args) throws IOException {
 		Path fileName = Path.of(args[0]);
