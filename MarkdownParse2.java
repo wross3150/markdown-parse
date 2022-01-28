@@ -1,14 +1,9 @@
-// File reading code from https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
-
-// javac -cp ".;lib\junit-4.13.2.jar;lib\hamcrest-core-1.3.jar" MarkdownParseTest.java
-// java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class MarkdownParse {
+public class MarkdownParse2 {
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then take up to
@@ -24,19 +19,13 @@ public class MarkdownParse {
                     currentIndex++;
                     continue;
                 }
-                try {
-                    if (!(markdown.charAt(nextOpenBracket-1) == '!')) {
-                        toReturn.add(markdown.substring(openParen + 1, closeParen));
-                    } 
-                }catch(Exception e){
-                    currentIndex = nextOpenBracket+1;
-                     continue;}
-                   
-                
+                if (!(markdown.charAt(nextOpenBracket-1) == '!')) {
+                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+                }
                 currentIndex = closeParen + 1;
             }
         }
-            return toReturn;
+        return toReturn;
     }
     public static void main(String[] args) throws IOException {
 		Path fileName = Path.of(args[0]);
